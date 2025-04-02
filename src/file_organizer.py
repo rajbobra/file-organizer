@@ -1,12 +1,12 @@
-
 import os
 import shutil
 
 class FileOrganizer:
 
-    def __init__(self, path, rules):
+    def __init__(self, path, rules, logger):
         self.path = os.path.expanduser(path)
         self.rules = rules
+        self.logger = logger
 
     
     def get_files(self):
@@ -37,13 +37,16 @@ class FileOrganizer:
                 dir = f'{self.path}/{self.rules[ext]}'
                 if not os.path.exists(dir):
                     os.mkdir(dir)
+                    self.logger.info(f'Created Directory: "{self.rules[ext]}" as it did not exist')
                 for file in file_map[ext]:
                     shutil.move(file, dir)
+                    self.logger.info(f'Moved: {file} --> {dir}')
                 # move all files to this dir
             else:
                 dir = f'{self.path}/Other'
                 if not os.path.exists(dir):
+                    self.logger.info(f'Created Directory: "Other" as it did not exist')
                     os.mkdir(dir)
                 for file in file_map[ext]:
                     shutil.move(file, dir)
-
+                    self.logger.info(f'Moved: {file} --> {dir}')
