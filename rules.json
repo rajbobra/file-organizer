@@ -1,0 +1,9 @@
+{
+    "rules": {
+        ".py": "Code",
+        ".txt": "Documents",
+        ".mp3": "Music",
+        ".jpg": "Images",
+        ".zip": "Archives"
+    }
+}
