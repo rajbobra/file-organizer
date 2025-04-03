@@ -6,5 +6,6 @@
         ".jpg": "Images",
         ".zip": "Archives",
         ".log" : "Logs"
-    }
+    },
+    "ignore_files": [".DS_Store"]
 }

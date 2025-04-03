@@ -8,9 +8,8 @@ CONFIG = '../rules.json'
 
 def main():
     config = Configuration(CONFIG)
-    rules = config.load_config()
     logger = setup_logger(DIR)
-    file_org = FileOrganizer(DIR, rules, logger)
+    file_org = FileOrganizer(DIR, config, logger)
     file_org.organize()
     print("Files have been organized!")
 
