@@ -4,12 +4,13 @@ import shutil
 
 class FileOrganizer:
 
-    def __init__(self, path, config, logger):
+    def __init__(self, path, config, logger, dry_run=False):
         self.path = os.path.expanduser(path)
         self.config = config
         self.logger = logger
-
+        self.dry_run = dry_run
     
+
     def get_files(self):
         file_map = defaultdict(list)
         for dirpath,_,files in os.walk(self.path):
@@ -28,8 +29,9 @@ class FileOrganizer:
         target_dir = os.path.join(self.path, target_dir_name)
         if not os.path.exists(target_dir):
             try:
-                os.mkdir(target_dir)
-                self.logger.info(f'Created Directory: "{target_dir}" as it did not exist')
+                if not self.dry_run:
+                    os.mkdir(target_dir)
+                    self.logger.info(f'Created Directory: "{target_dir}" as it did not exist')
             except PermissionError:
                 self.logger.info(f'Permission Denied: Failed to create "{target_dir}"')
                 raise
@@ -37,6 +39,14 @@ class FileOrganizer:
                 self.logger.info(f'Failed to create "{target_dir}": {e}')
                 raise
         return target_dir
+
+
+    def move_file(self, file, target_dir):
+        if self.dry_run:
+            self.logger.info(f"[DRY RUN] Would move: {file} --> {target_dir}")
+        else:
+            shutil.move(file, target_dir)
+            self.logger.info(f"Moved: {file} --> {target_dir}")
 
 
     def organize(self):
@@ -51,8 +61,7 @@ class FileOrganizer:
                     if not os.access(file, os.W_OK):
                         self.logger.error(f"Skipping: {file}. (no write permissions)")
                         continue
-                    shutil.move(file, target_dir)
-                    self.logger.info(f'Moved: {file} --> {target_dir}')
+                    self.move_file(file, target_dir)
                 except FileNotFoundError:
                     self.logger.error(f"File not found: {file}. It may have been deleted")
                 except PermissionError:
