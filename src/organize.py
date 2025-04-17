@@ -4,9 +4,6 @@ from logger import *
 import os
 from args import *
 
-DIR = '~/Documents/file-rehab-test'
-CONFIG = '../rules.json'
-
 def main():
     cli_args = parse_args()
     config = Configuration(cli_args.config)
