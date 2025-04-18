@@ -10,8 +10,8 @@ def main():
     logger = setup_logger(cli_args.path)
     file_org = FileOrganizer(cli_args.path, config, logger, cli_args.dry_run)
     file_org.organize()
-    print("Files have been organized!")
-
+    if not cli_args.dry_run:
+        print("Files have been organized!")
 
 if __name__ == '__main__':
     main()
