@@ -14,6 +14,15 @@ class Configuration:
             config = json.load(file)
 
         self.rules = config['rules']
+        self.unpack_rules()
         self.ignore_files = config['ignore_files']
-        print(f"Rules: {self.rules}")
-        print(f"Ignore: {self.ignore_files}")
+
+    
+    def unpack_rules(self):
+        unpacked_rules = {}
+        for exts, dir in self.rules.items():
+            extensions = [ext.strip() for ext in exts.split(",")]
+            for ext in extensions:
+                unpacked_rules[ext] = dir
+
+        self.rules = unpacked_rules

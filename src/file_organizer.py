@@ -18,7 +18,6 @@ class FileOrganizer:
                 if file in self.config.ignore_files:
                     continue
                 ext = os.path.splitext(file)[1]
-                print(f"Appended {file} to file map")
                 file_map[ext].append(os.path.join(dirpath, file))
             break # only scan current level
         
@@ -43,7 +42,9 @@ class FileOrganizer:
 
     def move_file(self, file, target_dir):
         if self.dry_run:
-            self.logger.info(f"[DRY RUN] Would move: {file} --> {target_dir}")
+            dry_msg = f'[DRY RUN] Would move: {file} --> {target_dir}'
+            self.logger.info(dry_msg)
+            print(dry_msg)
         else:
             shutil.move(file, target_dir)
             self.logger.info(f"Moved: {file} --> {target_dir}")
@@ -53,7 +54,6 @@ class FileOrganizer:
         file_map = self.get_files()
         if len(file_map) <= 1:
             self.logger.warning(f"No files found in '{self.path}' to organize.")
-        print(f'File map: {file_map}')
         for ext in file_map:
             target_dir = self.ensure_directory(self.config.rules[ext]) if ext in self.config.rules else self.ensure_directory('Other')
             for file in file_map[ext]:
