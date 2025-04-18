@@ -41,9 +41,10 @@ python3 organize.py --path={directory_path} --configuration={config_path}
 - Log files are moved to the "Other" directory if no rule is defined for .log extensions
 
 ---
-### More Enhancements coming up
+### Still under development and more Enhancements coming up
 - 🔄 Recursive folder organization
 - 💾 Backup before move
+- 🐛 Bug Fixes
 
 
 Contact me at rajbobra.py@gmail.com for any ideas or queries.
