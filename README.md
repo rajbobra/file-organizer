@@ -44,3 +44,6 @@ python3 organize.py --path={directory_path} --configuration={config_path}
 ### More Enhancements coming up
 - 🔄 Recursive folder organization
 - 💾 Backup before move
+
+
+Contact me at rajbobra.py@gmail.com for any ideas or queries.
