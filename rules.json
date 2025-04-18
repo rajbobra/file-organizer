@@ -1,7 +1,7 @@
 {
     "rules": {
-        ".py": "Code",
-        ".txt": "Documents",
+        ".py, .java, .cpp": "Code",
+        ".txt, .pdf": "Documents",
         ".mp3": "Music",
         ".jpg": "Images",
         ".zip": "Archives",
