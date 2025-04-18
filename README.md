@@ -7,6 +7,7 @@ A lightweight Python command-line tool to organize messy folders by automaticall
 ## 🚀 Getting Started
 
 ### 🔧 Prerequisites
+- Git installed on your system
 - Python 3 installed on your system
 
 ### 📦 Installation
